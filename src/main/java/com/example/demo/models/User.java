@@ -8,24 +8,24 @@ import lombok.ToString;
 @Entity
 @Table(name="users")
 @ToString
-public class Users {
+@Setter @Getter
+public class User {
 
     @Id
     @GeneratedValue
     private int id;
+
     @Column(nullable = false)
-    @Setter @Getter
     private String userName;
+
     @Column(nullable = false)
-    @Setter @Getter
     private String membership;
 
-    public Users() {
+    public User() {
 
     }
 
-    public Users(String userName, String membership) {
-        super();
+    public User(String userName, String membership) {
         this.userName = userName;
         this.membership = membership;
     }

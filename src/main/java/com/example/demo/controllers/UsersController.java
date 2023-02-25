@@ -1,28 +1,35 @@
 package com.example.demo.controllers;
 
-import com.example.demo.interfaces.UsersInterface;
+import com.example.demo.services.UsersService;
 import org.springframework.web.bind.annotation.*;
-import com.example.demo.models.Users;
+import com.example.demo.models.User;
 
 @RestController
 public class UsersController {
 
-    private UsersInterface userService;
+    private UsersService userService;
 
-    public UsersController(UsersInterface userService) {
+    public UsersController(UsersService userService) {
         this.userService = userService;
     }
 
-    @PostMapping("/mustafa-gym/users")
-    public Users addUser(@RequestBody Users user) { return userService.insert(user); }
-    @DeleteMapping("/mustafa-gym/users")
-    public void deleteUser(@RequestParam int id) {
+    @PostMapping("/users")
+    public User addUser(@RequestBody User user) {
+        return userService.insert(user);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public void deleteUser(@PathVariable int id) {
         userService.deleteUser(id);
     }
-    @GetMapping("/mustafa-gym/users")
-    public Users getUser(@RequestParam int id) {
+
+    @GetMapping("/users/{id}")
+    public User getUser(@PathVariable int id) {
         return userService.getUser(id);
     }
-    @PutMapping("/mustafa-gym/users")
-    public Users updateUser(@RequestParam int id, @RequestParam String membership) { return userService.updateUser(id,membership); }
+
+    @PutMapping("/users/{id}")
+    public User updateUser(@PathVariable int id, @RequestBody User user) {
+        return userService.updateUser(id, user);
+    }
 }
