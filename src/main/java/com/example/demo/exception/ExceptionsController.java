@@ -12,5 +12,4 @@ public class ExceptionsController {
     public ResponseEntity<Object> handleNoElementFound(RuntimeException ex) {
         return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
     }
-
 }
