@@ -15,18 +15,21 @@ public class User {
     @GeneratedValue
     private int id;
 
-    @Column(nullable = false)
-    private String userName;
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @Column(nullable = false)
-    private String membership;
+    private String password;
+
+    @Column
+    private String token;
 
     public User() {
 
     }
 
-    public User(String userName, String membership) {
-        this.userName = userName;
-        this.membership = membership;
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 }

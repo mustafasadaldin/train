@@ -11,4 +11,8 @@ public interface UsersService {
      User getUser(int id);
 
      User updateUser(int id, User user);
+
+     String validateUser(User user);
+
+     void logout(String token);
 }
