@@ -6,16 +6,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-@ControllerAdvice
-public class ExceptionsController {
+import java.util.NoSuchElementException;
 
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<Object> handleNoElementFound(RuntimeException ex) {
+@ControllerAdvice
+public class ExceptionsTranslater {
+
+    @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<Object> handleNoElementFound(NoSuchElementException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MalformedJwtException.class)
     public ResponseEntity<Object> handleInvalidToken(MalformedJwtException ex) {
-        return new ResponseEntity<>("Invalid credentials", HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NON_AUTHORITATIVE_INFORMATION);
     }
 }

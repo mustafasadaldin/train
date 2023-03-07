@@ -2,6 +2,7 @@ package com.example.demo.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -9,6 +10,7 @@ import lombok.ToString;
 @Table(name="users")
 @ToString
 @Setter @Getter
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -22,11 +24,7 @@ public class User {
     private String password;
 
     @Column
-    private String token;
-
-    public User() {
-
-    }
+    private String level;
 
     public User(String email, String password) {
         this.email = email;

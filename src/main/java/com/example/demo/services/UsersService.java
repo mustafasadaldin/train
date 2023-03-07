@@ -4,15 +4,13 @@ import com.example.demo.models.User;
 
 public interface UsersService {
 
-     User insert(User users);
+     String insert(User users);
 
-     void deleteUser(int id);
+     void deleteUser(String authToken);
 
-     User getUser(int id);
+     User getUser(int id, String authToken);
 
-     User updateUser(int id, User user);
+     User updateUser(String authToken, User user);
 
      String validateUser(User user);
-
-     void logout(String token);
 }
