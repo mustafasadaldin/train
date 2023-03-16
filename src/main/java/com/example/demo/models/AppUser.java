@@ -7,11 +7,12 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 @ToString
-@Setter @Getter
+@Setter
+@Getter
 @NoArgsConstructor
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue
@@ -26,7 +27,7 @@ public class User {
     @Column
     private String level;
 
-    public User(String email, String password) {
+    public AppUser(String email, String password) {
         this.email = email;
         this.password = password;
     }

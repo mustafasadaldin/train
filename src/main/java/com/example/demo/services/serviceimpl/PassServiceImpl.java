@@ -12,8 +12,7 @@ import org.springframework.stereotype.Service;
 public class PassServiceImpl implements PasswordService {
 
     @Bean
-    private PasswordEncoder passwordEncoder()
-    {
+    private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
