@@ -4,6 +4,7 @@ import com.example.demo.models.AppUser;
 import com.example.demo.services.JwtService;
 import com.example.demo.services.UsersService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

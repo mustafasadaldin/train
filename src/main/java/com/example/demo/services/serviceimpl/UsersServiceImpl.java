@@ -62,4 +62,9 @@ public class UsersServiceImpl implements UsersService {
         authorities.add(new SimpleGrantedAuthority(user.get().getLevel()));
         return new User(user.get().getEmail(), user.get().getPassword(), authorities);
     }
+
+    public AppUser trainerHiring (String email) {
+
+        return null;
+    }
 }

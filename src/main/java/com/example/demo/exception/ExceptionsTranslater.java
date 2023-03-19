@@ -1,6 +1,7 @@
 package com.example.demo.exception;
 
 import io.jsonwebtoken.MalformedJwtException;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -30,6 +31,11 @@ public class ExceptionsTranslater {
 
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<Object> handleBadCredentials(BadCredentialsException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+    }
+
+    @ExceptionHandler(TypeMismatchException.class)
+    public ResponseEntity<Object> handleMismatch(TypeMismatchException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NON_AUTHORITATIVE_INFORMATION);
     }
 }

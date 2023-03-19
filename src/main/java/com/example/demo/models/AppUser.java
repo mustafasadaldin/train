@@ -27,8 +27,9 @@ public class AppUser {
     @Column
     private String level;
 
-    public AppUser(String email, String password) {
+    public AppUser(String email, String password, String level) {
         this.email = email;
         this.password = password;
+        this.level = level;
     }
 }

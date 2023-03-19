@@ -13,4 +13,6 @@ public interface UsersService extends UserDetailsService {
 
     AppUser updateUser(AppUser appUser, String email);
 
+    public AppUser trainerHiring(String email);
+
 }

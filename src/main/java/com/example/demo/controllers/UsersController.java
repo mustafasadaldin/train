@@ -34,4 +34,10 @@ public class UsersController {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userService.updateUser(appUser, userDetails.getUsername());
     }
+
+    @PreAuthorize("hasAuthority('admin')")
+    @PostMapping("/trainers/hiring/{email}")
+    public AppUser trainerHiring(String email) {
+       return userService.trainerHiring(email);
+    }
 }

@@ -25,4 +25,10 @@ public class PassServiceImpl implements PasswordService {
     public boolean isTruePass(String password, String hashedPass) {
         return passwordEncoder().matches(password, hashedPass);
     }
+
+    @Override
+    public String genRandomPassword() {
+        return null;
+    }
+
 }
