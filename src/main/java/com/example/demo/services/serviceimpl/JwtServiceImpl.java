@@ -18,18 +18,25 @@ public class JwtServiceImpl implements JwtService {
     private int jwtExpirationMs;
 
     @Override
-    public String generateJwtToken(int id) {
-       return Jwts.builder()
-              .setSubject(id+"")
-              .setIssuedAt(new Date())
-              .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
-              .signWith(SignatureAlgorithm.HS256, jwtSecret)
-              .compact();
+    public String generateJwtToken(String email) {
+        return Jwts.builder()
+                .setSubject(email)
+                .setIssuedAt(new Date())
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .signWith(SignatureAlgorithm.HS256, jwtSecret)
+                .compact();
     }
 
     @Override
-    public int isValidToken(String authToken) {
-        return Integer.parseInt
-               (Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody().getSubject());
+    public String extractEmailFromJwtToken(String authToken) {
+        return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken).getBody().getSubject();
     }
+
+    @Override
+    public boolean isValidJwtToken(String authToken) {
+        Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+        return true;
+    }
+
+
 }

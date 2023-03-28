@@ -2,7 +2,9 @@ package com.example.demo.services;
 
 public interface JwtService {
 
-    String generateJwtToken(int id);
+    String generateJwtToken(String email);
 
-    int isValidToken(String authToken);
+    String extractEmailFromJwtToken(String authToken);
+
+    boolean isValidJwtToken(String authToken);
 }

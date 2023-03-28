@@ -7,13 +7,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 public class PassServiceImpl implements PasswordService {
 
     @Bean
-    private PasswordEncoder passwordEncoder()
-    {
+    private PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -26,4 +27,10 @@ public class PassServiceImpl implements PasswordService {
     public boolean isTruePass(String password, String hashedPass) {
         return passwordEncoder().matches(password, hashedPass);
     }
+
+    @Override
+    public String genRandomPassword() {
+        return UUID.randomUUID().toString();
+    }
+
 }

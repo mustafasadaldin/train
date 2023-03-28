@@ -1,16 +1,26 @@
 package com.example.demo.services;
 
-import com.example.demo.models.User;
+import com.example.demo.models.AppUser;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UsersService {
+public interface UsersService extends UserDetailsService {
 
-     String insert(User users);
+    String insert(AppUser users);
 
-     void deleteUser(String authToken);
+    void deleteUser(String authToken);
 
-     User getUser(int id, String authToken);
+    AppUser getUser(int id);
 
-     User updateUser(String authToken, User user);
+    AppUser updateUser(AppUser appUser, String email);
 
-     String validateUser(User user);
+    AppUser trainerHiring(AppUser user);
+
+    void forgetPassword(String email);
+
+    boolean isTruePin(int pin, String email);
+
+    float returnTrainerAvgRate(int id);
+
+    void updateTrainerRate(int id, int numberOfStars);
+
 }
