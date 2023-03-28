@@ -7,6 +7,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @AllArgsConstructor
 public class PassServiceImpl implements PasswordService {
@@ -28,7 +30,7 @@ public class PassServiceImpl implements PasswordService {
 
     @Override
     public String genRandomPassword() {
-        return null;
+        return UUID.randomUUID().toString();
     }
 
 }

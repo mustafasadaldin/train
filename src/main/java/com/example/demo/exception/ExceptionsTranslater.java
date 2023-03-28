@@ -1,5 +1,6 @@
 package com.example.demo.exception;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,11 @@ public class ExceptionsTranslater {
 
     @ExceptionHandler(TypeMismatchException.class)
     public ResponseEntity<Object> handleMismatch(TypeMismatchException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.NON_AUTHORITATIVE_INFORMATION);
+    }
+
+    @ExceptionHandler(JsonProcessingException.class)
+    public ResponseEntity<Object> handleJsonProcessingException(JsonProcessingException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.NON_AUTHORITATIVE_INFORMATION);
     }
 }

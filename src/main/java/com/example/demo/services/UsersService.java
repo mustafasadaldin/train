@@ -13,6 +13,14 @@ public interface UsersService extends UserDetailsService {
 
     AppUser updateUser(AppUser appUser, String email);
 
-    public AppUser trainerHiring(String email);
+    AppUser trainerHiring(AppUser user);
+
+    void forgetPassword(String email);
+
+    boolean isTruePin(int pin, String email);
+
+    float returnTrainerAvgRate(int id);
+
+    void updateTrainerRate(int id, int numberOfStars);
 
 }

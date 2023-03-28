@@ -27,6 +27,12 @@ public class AppUser {
     @Column
     private String level;
 
+    @Column(columnDefinition = "int default 0")
+    private Integer pin;
+
+    @Column(columnDefinition = "int default 0")
+    private Integer numberOfInvalidAttempt;
+
     public AppUser(String email, String password, String level) {
         this.email = email;
         this.password = password;
