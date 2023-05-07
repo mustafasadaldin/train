@@ -33,6 +33,18 @@ public class AppUser {
     @Column(columnDefinition = "int default 0")
     private Integer numberOfInvalidAttempt;
 
+    @Column(columnDefinition = "float default 0")
+    private Float height;
+
+    @Column(columnDefinition = "float default 0")
+    private Float weight;
+
+    @Column(columnDefinition = "int default 0")
+    private Integer age;
+
+    @Column
+    private byte[] image;
+
     public AppUser(String email, String password, String level) {
         this.email = email;
         this.password = password;

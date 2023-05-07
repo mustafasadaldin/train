@@ -16,8 +16,14 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.*;
+import java.util.zip.DataFormatException;
+import java.util.zip.Deflater;
+import java.util.zip.Inflater;
 
 @Service
 @AllArgsConstructor
@@ -52,11 +58,30 @@ public class UsersServiceImpl implements UsersService {
         return usersRepository.findById(id).get();
     }
 
-    public AppUser updateUser(AppUser appUser, String email) {
-        Optional<AppUser> appUserFromDb = usersRepository.findByEmail(email);
+    public AppUser changePassword(AppUser appUser) {
+        Optional<AppUser> appUserFromDb = usersRepository.findByEmail(appUser.getEmail());
         appUserFromDb.get().setPassword(passwordService.hashPassword(appUser.getPassword()));
-        appUserFromDb.get().setEmail(appUser.getEmail());
         return usersRepository.save(appUserFromDb.get());
+    }
+
+    public AppUser updateUserInfo(String email, int age, float height, float weight) {
+        Optional<AppUser> appUser = usersRepository.findByEmail(email);
+        if (appUser.isEmpty()) {
+            throw new NoSuchElementException("not founded");
+        } else {
+            if (age != 1) {
+                appUser.get().setAge(age);
+            }
+
+            if (height != 1) {
+                appUser.get().setHeight(height);
+            }
+
+            if (weight != 1) {
+                appUser.get().setWeight(weight);
+            }
+            return usersRepository.save(appUser.get());
+        }
     }
 
     @Override
@@ -112,16 +137,18 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
-    public float returnTrainerAvgRate(int id) {
-        Optional<TrainerRating> trainer = trainerRatingRepo.findByTrainerId(id);
+    public float returnTrainerAvgRate(String email) {
+        Optional<AppUser> user = usersRepository.findByEmail(email);
+        Optional<TrainerRating> trainer = trainerRatingRepo.findByTrainerId(user.get().getId());
         if (trainer.isEmpty()) {
             throw new UsernameNotFoundException("invalid credentials");
         }
         return trainer.get().getAvgRate();
     }
 
-    public void updateTrainerRate(int id, int numberOfStars) {
-        Optional<TrainerRating> trainer = trainerRatingRepo.findByTrainerId(id);
+    public void updateTrainerRate(String email, int numberOfStars) {
+        Optional<AppUser> user = usersRepository.findByEmail(email);
+        Optional<TrainerRating> trainer = trainerRatingRepo.findByTrainerId(user.get().getId());
         switch (Math.round(numberOfStars)) {
             case 1:
                 trainer.get().setStar1(trainer.get().getStar1() + 1);
@@ -159,4 +186,96 @@ public class UsersServiceImpl implements UsersService {
         );
         trainerRatingRepo.save(trainer.get());
     }
+
+    public void uploadImage(MultipartFile file, String email) throws IOException {
+        Optional<AppUser> appUser = usersRepository.findByEmail(email);
+        if (appUser.isEmpty()) {
+            throw new NoSuchElementException("not founded");
+        } else {
+            appUser.get().setImage(compressBytes(file.getBytes()));
+            usersRepository.save(appUser.get());
+        }
+    }
+
+    public byte[] getImage(String email) {
+        Optional<AppUser> appUser = usersRepository.findByEmail(email);
+        if (appUser.isEmpty()) {
+            throw new NoSuchElementException("not founded");
+        } else {
+            if (appUser.get().getImage() == null) {
+                throw new NoSuchElementException("not founded");
+            }
+            return decompressBytes(appUser.get().getImage());
+        }
+    }
+
+
+    public static byte[] compressBytes(byte[] data) {
+        Deflater deflater = new Deflater();
+        deflater.setInput(data);
+        deflater.finish();
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        while (!deflater.finished()) {
+            int count = deflater.deflate(buffer);
+            outputStream.write(buffer, 0, count);
+        }
+        try {
+            outputStream.close();
+        } catch (IOException e) {
+        }
+
+        return outputStream.toByteArray();
+    }
+
+
+    public static byte[] decompressBytes(byte[] data) {
+        Inflater inflater = new Inflater();
+        inflater.setInput(data);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream(data.length);
+        byte[] buffer = new byte[1024];
+        try {
+            while (!inflater.finished()) {
+                int count = inflater.inflate(buffer);
+                outputStream.write(buffer, 0, count);
+            }
+            outputStream.close();
+        } catch (IOException ioe) {
+        } catch (DataFormatException e) {
+        }
+        return outputStream.toByteArray();
+    }
+
+    public Map<String, String> getUserInfo(String email) {
+        Optional<AppUser> appUser = usersRepository.findByEmail(email);
+        if (appUser.isEmpty()) {
+            throw new NoSuchElementException("not founded");
+        } else {
+            Map<String, String> response = new HashMap<>();
+            response.put("age", appUser.get().getAge().toString());
+            response.put("height", appUser.get().getHeight().toString());
+            response.put("weight", appUser.get().getWeight().toString());
+            return response;
+        }
+    }
+
+    public String getAllTrainersNames() {
+        List<AppUser> users = usersRepository.findAllByLevel("trainer");
+        String names = "";
+        for (int i = 0; i < users.size(); i++) {
+            names = names + users.get(i).getEmail() + ",";
+        }
+        return names;
+    }
+
+    public String getAllUsersNames() {
+        List<AppUser> users = usersRepository.findAllByLevel("user");
+        String names = "";
+        for (int i = 0; i < users.size(); i++) {
+            names = names + users.get(i).getEmail() + ",";
+        }
+        return names;
+    }
+
 }
