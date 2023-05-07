@@ -1,0 +1,56 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .profile-picture {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    margin-top: 20px;
+  }
+  
+  .profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .fa {
+    cursor: pointer;
+    font-size: 24px;
+  }
+  .checked {
+    color: orange;
+  }
+  
+  .rate {
+    margin-left: 590px;
+    margin-top: 10px;
+  }
+
+  .email-container {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .email-icon {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #999;
+  }
+  
+  .email-value {
+    font-size: 16px;
+    color: #333;
+    padding-left: 40%;
+  }
+  
+  

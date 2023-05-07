@@ -1,0 +1,22 @@
+
+
+      <div class="profile-picture">
+        <label for="image-upload">
+          <img [src]="image" alt="Profile Picture">
+        </label>
+      </div> 
+      <div class="rate">
+        <span>{{actualRate}}  </span>
+        <span  class="fa fa-star" *ngFor="let star of stars" [class.checked]="star <= currentRating" (click)="rate(star)"></span>
+      </div>
+
+      <div class="email-container">
+        <mat-icon class="email-icon">email</mat-icon>
+        <div class="email-value">{{email}}</div>
+      </div>
+      
+      
+      
+
+
+  

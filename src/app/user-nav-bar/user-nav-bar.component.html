@@ -1,0 +1,13 @@
+<header class="header">
+  <button style="border: none;" (click)="logout()"><a class="Logout">Logout</a></button> 
+    <nav class="nav-items">
+      <a *ngIf="ifUser('user')" routerLink="/UserHomePage">Home</a>
+      <a *ngIf="ifUser('admin')" routerLink="/AdminHomePage">Home</a>
+      <a *ngIf="ifUser('trainer')" routerLink="/TrainerHomePage">Home</a>
+      <a *ngIf="ifUser('user') || ifUser('trainer')" routerLink="/Profile">Profile</a>
+      <a *ngIf="ifUser('admin')" routerLink="/Admin/TrainerSignUp">Hire a trainer</a>
+      <ng-content></ng-content>
+      <a href="#">Contact</a>
+    </nav>
+
+  </header>

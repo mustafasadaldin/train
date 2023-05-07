@@ -1,0 +1,20 @@
+<user-nav-bar >
+    <nav class="nav-items">
+   <a (click)="showUsersList()">Users</a> 
+   <a (click)="showTrainers()">Trainers</a>
+</nav>
+</user-nav-bar>
+<p *ngIf="!showTrianers && !showUsers">Admin Home</p>
+<div *ngIf="showTrianers || showUsers" class="back-container">
+    <button mat-icon-button (click)="goBack()" >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+  </div>
+  <div class="introDiv" *ngIf="showTrianers">All Trainers:</div>
+  <div class="introDiv" *ngIf="showUsers">All Users:</div>
+  <input class="textInput" type="text" placeholder="Search for emails" [(ngModel)]="searchText" *ngIf="showTrianers || showUsers">
+  <div class="list-container" *ngIf="showTrianers || showUsers">
+      <div class="list-box" *ngFor="let name of names | filter:searchText">
+        <button class="button" >{{name}}</button>
+      </div>
+    </div>

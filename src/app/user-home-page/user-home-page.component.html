@@ -1,0 +1,17 @@
+<user-nav-bar ></user-nav-bar>
+<div *ngIf="showElement" class="back-container">
+  <button mat-icon-button (click)="goBack()" >
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+</div>
+<div class="introDiv" *ngIf="!showElement">Discover our trainers:</div>
+<input class="textInput" type="text" placeholder="Search for emails" [(ngModel)]="searchText" *ngIf="!showElement">
+<div class="list-container" *ngIf="!showElement">
+    <div class="list-box" *ngFor="let name of names | filter:searchText">
+      <button class="button" (click)="showTrainer(name)">{{name}}</button>
+    </div>
+   
+  </div>
+
+  <trainer-profile *ngIf="showElement" [email]="temp"></trainer-profile>
+  

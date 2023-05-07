@@ -1,0 +1,88 @@
+<nav-bar [isVisable]="false"></nav-bar>
+
+<div class="intro" *ngIf="!loading">
+
+    <h1 *ngIf="!varifyCode">Welcome back</h1>
+    <h1 *ngIf="varifyCode && !isTruePinChangePassword">Code Verification</h1>
+    <h1 *ngIf="isTruePinChangePassword">Change Password</h1>
+
+<div class="login-container" *ngIf="!varifyCode">
+    <h2>Login</h2>
+    <form (submit)="validateUser($event)">
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input #email type="email" id="email" name="email" >
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input #password type="password" id="password" name="password" >
+      </div>
+
+      <div class="form-group" [ngStyle]="{'display': showElement ? 'block' : 'none'}">
+        <span style="color: red;">Invalid email or password</span>
+      </div>
+
+      <div class="form-group">
+        <label for="remember-me">
+          <input #rememberMe type="checkbox" id="remember-me" name="remember-me"> Remember me
+        </label>
+      </div>
+
+      <div class="signup-link">
+        Forget your password?<button type="button" (click)="forgetPassword()" class="signup-link">Click here</button>
+      </div>
+      <button  type="submit" id="login-btn">Login</button>
+    </form>
+
+    <div class="signup-link">
+      Don't have an account? <a routerLink="/SignUp">Sign up</a>
+    </div>
+  </div>
+
+  <div class="login-container" *ngIf="varifyCode && !isTruePinChangePassword">
+    <h2>Verification code</h2>
+    <form (submit)="verifyCode($event)">
+
+      <div class="form-group">
+        <label for="code">Code :</label>
+        <input #code type="number" id="code" name="email" >
+      </div>
+      
+      <div class="form-group" [ngStyle]="{'display': notValidCode ? 'block' : 'none'}">
+        <span style="color: red;">Invalid code</span>
+      </div>
+
+      <button  type="submit" id="login-btn">Verify my code</button>
+    </form>
+
+    <div class="signup-link">
+      Login with other account? <a routerLink="/Login">Login</a>
+    </div>
+  </div>
+
+  <div class="login-container" *ngIf="isTruePinChangePassword">
+    <h2>Change Password</h2>
+  <form (submit)="changePassword($event)" >
+    
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input #changePass type="password" id="password" name="password" >
+    </div>
+
+    <div class="form-group">
+      <label for="cPassword">Confirm password</label>
+      <input #confirmPass type="password" id="cPassword" name="cPassword" >
+    </div>
+
+    <div class="form-group" [ngStyle]="{'display': isNotMatched ? 'block' : 'none'}">
+      <span style="color: red;">Passwords must be matched</span>
+    </div>
+
+    <button  type="submit" id="login-btn">Change</button>
+  </form>
+</div>  
+</div>
+
+<div  *ngIf="loading"  class="loader"></div>

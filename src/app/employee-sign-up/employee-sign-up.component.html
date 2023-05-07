@@ -1,0 +1,10 @@
+<user-nav-bar></user-nav-bar>
+<form *ngIf="!loading" (submit)="signUp()" >
+    <h1>Employee Sign-up</h1>
+    <label for="email">Email:</label>
+    <input #email type="email" id="email" name="email" required>
+    <p class="error" id="password-error"></p>
+    <input type="submit" value="Sign up">
+</form>
+
+<div *ngIf="loading" style="position: absolute; top: 50%; left: 50%;"><span>Wait...</span></div>

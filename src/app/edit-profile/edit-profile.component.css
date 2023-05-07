@@ -1,0 +1,144 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .profile-picture {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: auto;
+    margin-top: 20px;
+  }
+  
+  .profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .profile-picture input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  button[type="submit"] {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .loader {
+    border: 16px solid black; 
+    border-top: 16px solid #5edaf0;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -25px;
+    margin-left: -25px;
+    z-index: 1000;
+  }
+
+  .info-box {
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #f5f5f5;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  }
+  
+  .info-box-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .info-box-cell {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .info-box-text {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .info-box-value {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .my-info-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: absolute;
+    margin-left: 900px;
+    margin-top: -80px;
+  }
+  
+  .my-info-button:hover {
+    background-color: #2980b9;
+  }
+
+  .rate {
+    margin-left: 220px;
+    margin-top: 10px;
+  }
+
+  .fa {
+    cursor: pointer;
+    font-size: 24px;
+  }
+  .checked {
+    color: orange;
+  }
+
+  
+  
+  
